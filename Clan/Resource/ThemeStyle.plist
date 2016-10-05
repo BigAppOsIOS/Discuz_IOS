@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>YZSegMent</key>
+	<string>103, 169, 99</string>
+	<key>YZBBSName</key>
+	<string>BigAppOs</string>
+	<key>YZBaseURL</key>
+	<string>http://www.bigappos.org</string>
+	<key>YZBasePath</key>
+	<string>api/mobile/iyz_index.php</string>
+	<key>BIGAPPVERSION</key>
+	<string>1000</string>
+	<key>APPSTYLE</key>
+	<string>1</string>
+	<key>kAPP_DOWNLOAD_URL</key>
+	<string>https://itunes.apple.com/cn/app/you-yue-she-qu-you-yue-e-yu/id1054282781</string>
+	<key>OFFLINE</key>
+	<string>0</string>
+	<key>YouZuLogin</key>
+	<string>0</string>
+	<key>ShareAppkeySina</key>
+	<string>861150897</string>
+	<key>ShareAppkeyTecent</key>
+	<string>101194373</string>
+	<key>ShareAppkeyWechat</key>
+	<string>wxd0baaade6c032883</string>
+	<key>ShareAppSecretSina</key>
+	<string>3c6be6824bc97de74eeb852436125565</string>
+	<key>ShareAppSecretWechat</key>
+	<string>6d0db2c95ffdc493773b05b50c5b3b09</string>
+	<key>ShareAppSecretTecent</key>
+	<string>f30f08a2d9da493d77682b98296ccf28</string>
+	<key>ShareAppRedirectUriSina</key>
+	<string>https://api.weibo.com/oauth2/default.html</string>
+	<key>open_image_mode</key>
+	<string>1</string>
+</dict>
+</plist>
