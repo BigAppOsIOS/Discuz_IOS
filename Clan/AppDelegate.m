@@ -109,23 +109,30 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     IQKeyboardManager *magngerKeyboard = [IQKeyboardManager sharedManager];
-    [magngerKeyboard disableInViewControllerClass:NSClassFromString(@"PostDetailVC")];
-    [magngerKeyboard disableInViewControllerClass:NSClassFromString(@"PostDetailViewController")];
-    [magngerKeyboard disableInViewControllerClass:NSClassFromString(@"ChatViewController")];
-    [magngerKeyboard disableInViewControllerClass:NSClassFromString(@"PostSendViewController")];
-    [magngerKeyboard disableInViewControllerClass:NSClassFromString(@"PostActivityViewController")];
-    [magngerKeyboard disableInViewControllerClass:NSClassFromString(@"PostActivityInfoVC")];
-
-    [magngerKeyboard disableToolbarInViewControllerClass:NSClassFromString(@"PostDetailVC")];
-    [magngerKeyboard disableToolbarInViewControllerClass:NSClassFromString(@"PostDetailViewController")];
-    [magngerKeyboard disableToolbarInViewControllerClass:NSClassFromString(@"ChatViewController")];
-    [magngerKeyboard disableToolbarInViewControllerClass:NSClassFromString(@"PostSendViewController")];
-    [magngerKeyboard disableToolbarInViewControllerClass:NSClassFromString(@"PostActivityViewController")];
-    [magngerKeyboard disableToolbarInViewControllerClass:NSClassFromString(@"PostActivityInfoVC")];
-
-
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    // 极光推送
+    
+    NSArray <NSString *> *disableInViewControllerArray = [NSArray arrayWithObjects:@"PostDetailVC",
+                                          @"PostDetailViewController",
+                                          @"ChatViewController",
+                                          @"PostSendViewController",
+                                          @"PostActivityViewController",
+                                          @"PostActivityInfoVC", nil];
+    [disableInViewControllerArray enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [magngerKeyboard disableInViewControllerClass:NSClassFromString(obj)];
+    }];
+    
+    NSArray <NSString *> *disableToolbarInViewControllerArray = [NSArray arrayWithObjects:@"PostDetailVC"
+                                                                 , @"PostDetailViewController"
+                                                                 , @"ChatViewController"
+                                                                 , @"PostSendViewController"
+                                                                 , @"PostActivityViewController"
+                                                                 , @"PostActivityInfoVC", nil];
+    [disableToolbarInViewControllerArray enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [magngerKeyboard disableToolbarInViewControllerClass:NSClassFromString(obj)];
+    }];
+	
+	[UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    	
+	// 极光推送
     [self setupJPush:launchOptions];
     
     //注册登录 退出登录
@@ -138,7 +145,11 @@
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     //初始化
     [self configShareSDK];
-    //设置状态栏
+    
+    //注册 Mob SMS_SDK
+    [SMSSDK registerApp:K_APPKEY_SMSSDK withSecret:K_APPSECRET_SMSSDK];
+    
+    //设置状态栏和全局左滑手势
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [MLBlackTransition validatePanPackWithMLBlackTransitionGestureRecognizerType:MLBlackTransitionGestureRecognizerTypePan];

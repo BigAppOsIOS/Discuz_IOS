@@ -92,4 +92,8 @@
 #define K_APPKEY_WEIXIN @"wxd0baaade6c032883"
 #define K_APPSECRET_WEIXIN @"6d0db2c95ffdc493773b05b50c5b3b09"
 
+//支持短信注册的key和secret
+#define K_APPKEY_SMSSDK @"16e83e226c0f3"
+#define K_APPSECRET_SMSSDK @"50aa861a7b2a94f29cc2cc5a4f1e2edb"
+
 #endif

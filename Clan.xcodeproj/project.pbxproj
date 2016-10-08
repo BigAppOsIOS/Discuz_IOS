@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		138C4AF91D11DE9E002BB1A3 /* jpush-ios-2.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 138C4AF61D11DE9E002BB1A3 /* jpush-ios-2.1.6.a */; };
+		1C459F161DA8C22500790FBE /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C459F151DA8C22500790FBE /* SMS_SDK.framework */; };
 		6D017A311BCE4F0800F6FC1A /* (null) in Resources */ = {isa = PBXBuildFile; };
 		6D017A5A1BCE588500F6FC1A /* TMCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D017A541BCE588500F6FC1A /* TMCache.m */; };
 		6D017A5B1BCE588500F6FC1A /* TMDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D017A571BCE588500F6FC1A /* TMDiskCache.m */; };
@@ -1100,6 +1101,7 @@
 /* Begin PBXFileReference section */
 		138C4AF61D11DE9E002BB1A3 /* jpush-ios-2.1.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.6.a"; sourceTree = "<group>"; };
 		138C4AF71D11DE9E002BB1A3 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		1C459F151DA8C22500790FBE /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMS_SDK.framework; sourceTree = "<group>"; };
 		24796FEBC543571A108A487B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D0179F51BCDFD2D00F6FC1A /* WebNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebNaviViewController.h; sourceTree = "<group>"; };
 		6D0179F61BCDFD2D00F6FC1A /* WebNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebNaviViewController.m; sourceTree = "<group>"; };
@@ -2697,6 +2699,7 @@
 				6DFAF2051B255B6600B179D5 /* CoreGraphics.framework in Frameworks */,
 				6DED550C1B954AE0006FB167 /* libz.dylib in Frameworks */,
 				6D3DF9991AEE320E00090760 /* Security.framework in Frameworks */,
+				1C459F161DA8C22500790FBE /* SMS_SDK.framework in Frameworks */,
 				6D3DF9921AEE31DD00090760 /* SystemConfiguration.framework in Frameworks */,
 				6DED550A1B954AB4006FB167 /* CoreFoundation.framework in Frameworks */,
 				6DB7DB5F1BE3A44E00389A8E /* libWeiboSDK.a in Frameworks */,
@@ -4019,6 +4022,7 @@
 		6DB7DB411BE3A44E00389A8E /* shareSDK */ = {
 			isa = PBXGroup;
 			children = (
+				1C459F151DA8C22500790FBE /* SMS_SDK.framework */,
 				6DB7DB421BE3A44E00389A8E /* extends */,
 				6DB7DB581BE3A44E00389A8E /* MOBFoundation.framework */,
 				6DB7DB591BE3A44E00389A8E /* ShareSDK.bundle */,
