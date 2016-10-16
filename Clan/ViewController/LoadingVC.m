@@ -46,11 +46,23 @@
 
 - (void)buildUI
 {
+    NSString *loadImageURL = @"";
+    if (kDEVICE_IS_IPHONE4) {
+        loadImageURL = @"http://dw.bigappos.org/test/qidong1.png";
+    }else if (kDEVICE_IS_IPHONE5) {
+        loadImageURL = @"http://dw.bigappos.org/test/qidong2.png";
+    }else if (kDEVICE_IS_IPHONE6) {
+        loadImageURL = @"http://dw.bigappos.org/test/qidong3.png";
+    }else if (kDEVICE_IS_IPHONE6Plus) {
+        loadImageURL = @"http://dw.bigappos.org/test/qidong4.png";
+    }
+    
     UIImageView *bgView = [UIImageView new];
     bgView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT);
     NSString *imgName = [Util splashImageName];
     UIImage *splashImage = kIMG(imgName);
-    bgView.image = splashImage;
+    [bgView sd_setImageWithURL:[NSURL URLWithString:loadImageURL] placeholderImage:splashImage];
+//    bgView.image = splashImage;
     [self.view addSubview:bgView];
 }
 
