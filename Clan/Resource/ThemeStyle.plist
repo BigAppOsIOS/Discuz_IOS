@@ -20,6 +20,20 @@
 	<string>0</string>
 	<key>YouZuLogin</key>
 	<string>0</string>
+	<key>IsUserShare</key>
+	<string>1</string>
+	<key>IsShareWechatFriends</key>
+	<string>0</string>
+	<key>IsShareWechatCircle</key>
+	<string>0</string>
+	<key>IsShareSina</key>
+	<string>0</string>
+	<key>IsShareQQFriends</key>
+	<string>0</string>
+	<key>IsShareQZone</key>
+	<string>0</string>
+	<key>IsShareCopyLink</key>
+	<string>1</string>
 	<key>ShareAppkeySina</key>
 	<string>861150897</string>
 	<key>ShareAppkeyTecent</key>

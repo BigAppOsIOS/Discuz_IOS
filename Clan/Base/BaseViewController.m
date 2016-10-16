@@ -255,8 +255,21 @@
     shareitemCopy.image = kIMG(@"share_copy");
     shareitemCopy.shareType = SSDKPlatformTypeCopy;
     
-    NSArray *shareListArr = @[shareitemWeiXinSession, shareitemWeiXinTimeline, shareitemSina, shareitemQQ, shareitemQQSpace, shareitemCopy];
-    ShareMenu *menu = [[ShareMenu alloc]initWithFrame:CGRectMake(0, 70, kSCREEN_WIDTH, 400) withShareList:shareListArr];
+    NSArray *kIsShareArr = [NSArray arrayWithObjects:kIsShareWechatFriends, kIsShareWechatCircle, kIsShareSina, kIsShareQQFriends, kIsShareQZone, kIsShareCopyLink,  nil];
+    NSArray *shareListArray = @[shareitemWeiXinSession, shareitemWeiXinTimeline, shareitemSina, shareitemQQ, shareitemQQSpace, shareitemCopy];
+
+    NSMutableArray *shareListArr = [NSMutableArray array];
+    for (NSString *isShareString in kIsShareArr) {
+        NSString *isShare = [NSString returnStringWithPlist:isShareString];
+        NSUInteger index = [kIsShareArr indexOfObject:isShareString];
+        if (!isNull(isShare) && isShare.intValue == 1) {
+            [shareListArr addObject:[shareListArray objectAtIndex:index]];
+        }
+    }
+    
+    CGFloat menuHeight = shareListArr.count <= 3 ? 200 : 400;
+    
+    ShareMenu *menu = [[ShareMenu alloc]initWithFrame:CGRectMake(0, 70, kSCREEN_WIDTH, menuHeight) withShareList:shareListArr];
     [menu show];
     WEAKSELF
     [menu setSelectedBlock:^(id data) {

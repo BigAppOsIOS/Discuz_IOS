@@ -25,6 +25,16 @@
 #define kBIGAPPVERSION @"BIGAPPVERSION" //bigApp Version
 #define KCustomItemNotifi @"customItemNOtifi" //自定义itemBar通知
 
+//ShareMenu 配置分享UI
+#define kIsUserShare                @"IsUserShare"                  //  是否可以分享
+
+#define kIsShareWechatFriends       @"IsShareWechatFriends"         //  是否可以分享至 微信好友
+#define kIsShareWechatCircle        @"IsShareWechatCircle"          //  是否可以分享至 微信朋友圈
+#define kIsShareSina                @"IsShareSina"                  //  是否可以分享至 新浪
+#define kIsShareQQFriends           @"IsShareQQFriends"             //  是否可以分享至 QQ好友
+#define kIsShareQZone               @"IsShareQZone"                 //  是否可以分享至 QQ空间
+#define kIsShareCopyLink            @"IsShareCopyLink"              //  是否可以 拷贝链接
+
 //ThridpartLoginConfig 第三方登录配置文件
 #define kSupportQQLogin @"SupportQQLogin" //是否支持QQ登录
 #define kSupportSinaLogin @"SupportSinaLogin" //是否支持sina登录

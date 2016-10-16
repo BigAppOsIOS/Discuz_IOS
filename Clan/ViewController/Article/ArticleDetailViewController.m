@@ -76,24 +76,43 @@
 - (IBAction)viewMoreAction:(id)sender
 {
     NSString *favoImgName = [Util isFavoed_withID:_articleModel.aid forType:myArticle] ? @"detail_favo_H" : @"favo_N";
-    NSArray *titls = @[@"收藏",@"分享"];
-    NSArray *imgsN = @[favoImgName,@"share_N"];
-    NSArray *imgsH = @[favoImgName,@"share_N"];
+    NSString *isUserShare = [NSString returnStringWithPlist:kIsUserShare];
+    NSMutableArray *titles = [NSMutableArray array];
+    NSMutableArray *imgsN = [NSMutableArray array];
+    NSMutableArray *imgsH = [NSMutableArray array];
+    if (!isNull(isUserShare)) {
+        if (isUserShare.intValue == 1) {
+            titles = [NSMutableArray arrayWithObjects:@"收藏",@"分享", nil];
+            imgsN = [NSMutableArray arrayWithObjects:favoImgName,@"share_N", nil];
+            imgsH = [NSMutableArray arrayWithObjects:favoImgName,@"share_N", nil];
+        }else {
+            titles = [NSMutableArray arrayWithObjects:@"收藏", nil];
+            imgsN = [NSMutableArray arrayWithObjects:favoImgName, nil];
+            imgsH = [NSMutableArray arrayWithObjects:favoImgName, nil];
+        }
+    }
+//    NSArray *titls = @[@"收藏",@"分享"];
+//    NSArray *imgsN = @[favoImgName,@"share_N"];
+//    NSArray *imgsH = @[favoImgName,@"share_N"];
     
-    PopoverView *pop = [[PopoverView alloc]initWithFromBarButtonItem:_viewMoreBtn inView:self.view titles:titls images:imgsN selectImages:imgsH];
+    PopoverView *pop = [[PopoverView alloc]initWithFromBarButtonItem:_viewMoreBtn inView:self.view titles:titles images:imgsN selectImages:imgsH];
     pop.selectIndex = 0;
     WEAKSELF
     pop.selectRowAtIndex = ^(NSInteger index)
     {
         STRONGSELF
-        if (index == 0)
+        if (titles.count == 1) {
             [strongSelf favoAction];
-        else if (index == 1)
-            [strongSelf shareAction];
-//        else if (index == 2)
-//            [strongSelf jumpPageAction];
-//        else
-//            [strongSelf reportAction];
+        }else {
+            if (index == 0)
+                [strongSelf favoAction];
+            else if (index == 1)
+                [strongSelf shareAction];
+            //        else if (index == 2)
+            //            [strongSelf jumpPageAction];
+            //        else
+            //            [strongSelf reportAction];
+        }
     };
     [pop show];
 }

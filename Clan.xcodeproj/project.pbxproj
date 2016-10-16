@@ -1006,7 +1006,6 @@
 		8AB7CC5A1AA00D7E007A17E8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AB7CC591AA00D7E007A17E8 /* Images.xcassets */; };
 		8AB7CC691AA00D7E007A17E8 /* ClanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB7CC681AA00D7E007A17E8 /* ClanTests.m */; };
 		8AB7CC811AA0512E007A17E8 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB7CC801AA0512E007A17E8 /* BaseViewController.m */; };
-		8AB7CCBB1AA404A2007A17E8 /* ThemeStyle.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8AB7CCBA1AA404A2007A17E8 /* ThemeStyle.plist */; };
 		8AB7CCD41AA5A327007A17E8 /* YZHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB7CCD31AA5A327007A17E8 /* YZHelper.m */; };
 		8AB7CCD81AA5A49D007A17E8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB7CCD71AA5A49D007A17E8 /* AssetsLibrary.framework */; };
 		8AB7CCDA1AA5A6E4007A17E8 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB7CCD91AA5A6E4007A17E8 /* libxml2.2.dylib */; };
@@ -2523,7 +2522,6 @@
 		8AB7CC681AA00D7E007A17E8 /* ClanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClanTests.m; sourceTree = "<group>"; };
 		8AB7CC7F1AA0512E007A17E8 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		8AB7CC801AA0512E007A17E8 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		8AB7CCBA1AA404A2007A17E8 /* ThemeStyle.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ThemeStyle.plist; path = ../Resource/ThemeStyle.plist; sourceTree = "<group>"; };
 		8AB7CCCE1AA59BEB007A17E8 /* Clan.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clan.pch; sourceTree = "<group>"; };
 		8AB7CCD21AA5A327007A17E8 /* YZHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHelper.h; sourceTree = "<group>"; };
 		8AB7CCD31AA5A327007A17E8 /* YZHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZHelper.m; sourceTree = "<group>"; };
@@ -4969,7 +4967,6 @@
 			isa = PBXGroup;
 			children = (
 				8AFDEE311AD3D92F001D267B /* YZThemeStyle.h */,
-				8AB7CCBA1AA404A2007A17E8 /* ThemeStyle.plist */,
 				8AB7CC501AA00D7D007A17E8 /* AppDelegate.h */,
 				8AB7CC511AA00D7D007A17E8 /* AppDelegate.m */,
 				6DDA66941B0C30B600914ED8 /* AppDisplayConfig.h */,
@@ -5538,7 +5535,7 @@
 				TargetAttributes = {
 					8AB7CC481AA00D7D007A17E8 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = W5Q36C6FJD;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -5760,7 +5757,6 @@
 				6DB7DB5E1BE3A44E00389A8E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				6D65EF191C0ECCD70032B5DD /* 2_4_H@3x.png in Resources */,
 				6D65F0571C0ECCD70032B5DD /* sousuoshouye@3x.png in Resources */,
-				8AB7CCBB1AA404A2007A17E8 /* ThemeStyle.plist in Resources */,
 				6D65F00E1C0ECCD70032B5DD /* jiantou_post_up@2x.png in Resources */,
 				6D65EEF51C0ECCD70032B5DD /* 1_4_H@3x.png in Resources */,
 				6D65EFFE1C0ECCD70032B5DD /* default_image@2x.png in Resources */,
@@ -6778,6 +6774,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6835,8 +6832,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Euyyue Education Technology Jinan Company Limited (W5Q36C6FJD)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Euyyue Education Technology Jinan Company Limited (W5Q36C6FJD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6891,6 +6889,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -6910,6 +6909,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

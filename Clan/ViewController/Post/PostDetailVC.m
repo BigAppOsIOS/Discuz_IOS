@@ -287,16 +287,7 @@ typedef enum {
     self.favoButton = favoBtn;
     [bottomview addSubview:favoBtn];
     [self resetFavoBtn];
-    //分享按钮
-    UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    shareBtn.showsTouchWhenHighlighted = YES;
-    shareBtn.exclusiveTouch = YES;
-    [shareBtn setImage:kIMG(@"detail_share") forState:UIControlStateNormal];
-    [shareBtn setTitle:@"  分享" forState:UIControlStateNormal];
-    [shareBtn.titleLabel setFont:[UIFont fitFontWithSize:12.f]];
-    [shareBtn setTitleColor:kUIColorFromRGB(0x6c6c6c) forState:UIControlStateNormal];
-    [shareBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
-    [bottomview addSubview:shareBtn];
+    
     float width = (kSCREEN_WIDTH-2*space)/3.0;
     [commentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(bottomview.mas_leading).offset(space);
@@ -310,12 +301,26 @@ typedef enum {
         make.height.equalTo(@44);
         make.width.equalTo(@(width));
     }];
-    [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(favoBtn.mas_trailing);
-        make.top.equalTo(bottomview.mas_top);
-        make.height.equalTo(@44);
-        make.width.equalTo(@(width));
-    }];
+    
+    //分享按钮
+    NSString *isUserShare = [NSString returnStringWithPlist:kIsUserShare];
+    if (!isNull(isUserShare) && isUserShare.intValue == 1) {
+        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareBtn.showsTouchWhenHighlighted = YES;
+        shareBtn.exclusiveTouch = YES;
+        [shareBtn setImage:kIMG(@"detail_share") forState:UIControlStateNormal];
+        [shareBtn setTitle:@"  分享" forState:UIControlStateNormal];
+        [shareBtn.titleLabel setFont:[UIFont fitFontWithSize:12.f]];
+        [shareBtn setTitleColor:kUIColorFromRGB(0x6c6c6c) forState:UIControlStateNormal];
+        [shareBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
+        [bottomview addSubview:shareBtn];
+        [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(favoBtn.mas_trailing);
+            make.top.equalTo(bottomview.mas_top);
+            make.height.equalTo(@44);
+            make.width.equalTo(@(width));
+        }];
+    }
 }
 
 - (void)resetReturnTopBtn
@@ -461,21 +466,40 @@ typedef enum {
 //更多按钮
 - (IBAction)viewMoreAction:(id)sender
 {
+    NSString *isUserShare = [NSString returnStringWithPlist:kIsUserShare];
     if (_isArticle) {
         NSString *favoImgName = [Util isFavoed_withID:_postModel.tid forType:myArticle] ? @"detail_favo_H" : @"favo_N";
-        NSArray *titls = @[@"收藏",@"分享"];
-        NSArray *imgsN = @[favoImgName,@"share_N"];
-        NSArray *imgsH = @[favoImgName,@"share_N"];
-        PopoverView *pop = [[PopoverView alloc]initWithFromBarButtonItem:_viewMoreBtn inView:self.view titles:titls images:imgsN selectImages:imgsH];
+        NSMutableArray *titles = [NSMutableArray array];
+        NSMutableArray *imgsN = [NSMutableArray array];
+        NSMutableArray *imgsH = [NSMutableArray array];
+        if (!isNull(isUserShare)) {
+            if (isUserShare.intValue == 1) {
+                titles = [NSMutableArray arrayWithObjects:@"收藏",@"分享", nil];
+                imgsN = [NSMutableArray arrayWithObjects:favoImgName,@"share_N", nil];
+                imgsH = [NSMutableArray arrayWithObjects:favoImgName,@"share_N", nil];
+            }else {
+                titles = [NSMutableArray arrayWithObjects:@"收藏", nil];
+                imgsN = [NSMutableArray arrayWithObjects:favoImgName, nil];
+                imgsH = [NSMutableArray arrayWithObjects:favoImgName, nil];
+            }
+        }
+//        NSArray *titls = @[@"收藏",@"分享"];
+//        NSArray *imgsN = @[favoImgName,@"share_N"];
+//        NSArray *imgsH = @[favoImgName,@"share_N"];
+        PopoverView *pop = [[PopoverView alloc]initWithFromBarButtonItem:_viewMoreBtn inView:self.view titles:titles images:imgsN selectImages:imgsH];
         pop.selectIndex = 0;
         WEAKSELF
         pop.selectRowAtIndex = ^(NSInteger index)
         {
             STRONGSELF
-            if (index == 0)
+            if (titles.count == 1) {
                 [strongSelf favoPortalAction];
-            else if (index == 1)
-                [strongSelf shareAction];
+            }else {
+                if (index == 0)
+                    [strongSelf favoPortalAction];
+                else if (index == 1)
+                    [strongSelf shareAction];
+            }
         };
         [pop show];
         return;
@@ -483,51 +507,98 @@ typedef enum {
     WEAKSELF
     [_bridge callHandler:@"getPostData" data:nil responseCallback:^(id responseData) {
         NSString *favoImgName = [Util isFavoed_withID:_postModel.tid forType:myPost] ? @"detail_favo_H" : @"favo_N";
-        NSArray *titls = @[@"收藏",@"分享", @"跳页",@"跳楼",@"举报"];
-        NSArray *imgsN = @[favoImgName,@"share_N", @"jump_N",@"detail_tiaolou",@"jubao"];
-        NSArray *imgsH = @[favoImgName,@"share_N", @"jump_N",@"detail_tiaolou",@"jubao"];
+//        NSArray *titls = @[@"收藏",@"分享", @"跳页",@"跳楼",@"举报"];
+//        NSArray *imgsN = @[favoImgName,@"share_N", @"jump_N",@"detail_tiaolou",@"jubao"];
+//        NSArray *imgsH = @[favoImgName,@"share_N", @"jump_N",@"detail_tiaolou",@"jubao"];
+        
+        NSMutableArray *titles = [NSMutableArray array];
+        NSMutableArray *imgsN = [NSMutableArray array];
+        NSMutableArray *imgsH = [NSMutableArray array];
+        if (!isNull(isUserShare)) {
+            if (isUserShare.intValue == 1) {
+                titles = [NSMutableArray arrayWithObjects:@"收藏",@"分享",@"跳页",@"跳楼",@"举报", nil];
+                imgsN = [NSMutableArray arrayWithObjects:favoImgName,@"share_N",@"jump_N",@"detail_tiaolou",@"jubao", nil];
+                imgsH = [NSMutableArray arrayWithObjects:favoImgName,@"share_N",@"jump_N",@"detail_tiaolou",@"jubao", nil];
+            }else {
+                titles = [NSMutableArray arrayWithObjects:@"收藏",@"跳页",@"跳楼",@"举报", nil];
+                imgsN = [NSMutableArray arrayWithObjects:favoImgName,@"jump_N",@"detail_tiaolou",@"jubao", nil];
+                imgsH = [NSMutableArray arrayWithObjects:favoImgName,@"jump_N",@"detail_tiaolou",@"jubao", nil];
+            }
+        }
+        
         NSString *fid = responseData[@"fid"];
         NSString *tid = responseData[@"tid"];
         NSString *ismoderator = responseData[@"ismoderator"];
         //for test - by ximi
         if (ismoderator && ismoderator.intValue == 1) {
-            titls = @[@"收藏",@"分享", @"跳页",@"跳楼",@"举报",@"删除主题"];
-            imgsN = @[favoImgName,@"share_N", @"jump_N",@"detail_tiaolou",@"jubao",@"detail_delete"];
-            imgsH = @[favoImgName,@"share_N", @"jump_N",@"detail_tiaolou",@"jubao",@"detail_delete"];
+            [titles addObject:@"删除主题"];
+            [imgsN addObject:@"detail_delete"];
+            [imgsH addObject:@"detail_delete"];
+//            titls = @[@"收藏",@"分享", @"跳页",@"跳楼",@"举报",@"删除主题"];
+//            imgsN = @[favoImgName,@"share_N", @"jump_N",@"detail_tiaolou",@"jubao",@"detail_delete"];
+//            imgsH = @[favoImgName,@"share_N", @"jump_N",@"detail_tiaolou",@"jubao",@"detail_delete"];
         }
-        PopoverView *pop = [[PopoverView alloc]initWithFromBarButtonItem:_viewMoreBtn inView:self.view titles:titls images:imgsN selectImages:imgsH];
+        PopoverView *pop = [[PopoverView alloc]initWithFromBarButtonItem:_viewMoreBtn inView:self.view titles:titles images:imgsN selectImages:imgsH];
         pop.selectIndex = 0;
         pop.selectRowAtIndex = ^(NSInteger index)
         {
-            if (index == 0)
-            {
-                [weakSelf favoAction];
+            if (!isNull(isUserShare) && isUserShare.intValue == 1) {
+                if (index == 0)
+                {
+                    [weakSelf favoAction];
+                }
+                else if (index == 1)
+                {
+                    [weakSelf shareAction];
+                }
+                else if (index == 2)
+                {
+                    [weakSelf jumpPageAction];
+                }
+                else if(index == 3)
+                {
+                    [weakSelf tiaolouAction];
+                }
+                else if(index == 4)
+                {
+                    [weakSelf reportAction];
+                }
+                else if (index == 5)
+                {
+                    [weakSelf deletePostWithTid:tid withFid:fid];
+                }
+                else if (index == 6)
+                {
+                    //打印源码
+                    [weakSelf showSource];
+                }
+            }else {
+                if (index == 0)
+                {
+                    [weakSelf favoAction];
+                }
+                else if (index == 1)
+                {
+                    [weakSelf jumpPageAction];
+                }
+                else if (index == 2)
+                {
+                    [weakSelf tiaolouAction];
+                }
+                else if(index == 3)
+                {
+                    [weakSelf reportAction];
+                }
+                else if(index == 4)
+                {
+                    [weakSelf deletePostWithTid:tid withFid:fid];
+                }
+                else if (index == 5)
+                {
+                    [weakSelf showSource];
+                }
             }
-            else if (index == 1)
-            {
-                [weakSelf shareAction];
-            }
-            else if (index == 2)
-            {
-                [weakSelf jumpPageAction];
-            }
-            else if(index == 3)
-            {
-                [weakSelf tiaolouAction];
-            }
-            else if(index == 4)
-            {
-                [weakSelf reportAction];
-            }
-            else if (index == 5)
-            {
-                [weakSelf deletePostWithTid:tid withFid:fid];
-            }
-            else if (index == 6)
-            {
-                //打印源码
-                [weakSelf showSource];
-            }
+
         };
         [pop show];
     }];
